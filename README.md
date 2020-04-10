@@ -11,11 +11,11 @@ After the 3 seconds, the program will record the position of your mouse. That po
 Finally, the program will minimize and will start to simulate mouse presses/clicks to draw on the screen.
 
 # Libraries Used
-Contour Recognition: OpenCV
-Interface: PySimpleGUI
-Drawing: Pynput
+Contour Recognition: OpenCV<br/>
+Interface: PySimpleGUI<br/>
+Drawing: Pynput<br/>
 
-Other libraries:
+Other libraries:<br/>
 Time, Winsound, Numpy, urrlib.request, skimage.io, keyboard
 
 # Learn more
