@@ -3,6 +3,8 @@ A program made in Python 3.7 that automatically draws an image using OpenCV and 
 
 # How to use
 ![Interface Image](https://github.com/GustavoMuller2019/AutoDrawer/blob/master/examples/interfaceExample.png?raw=true)
+![Original Image](https://github.com/GustavoMuller2019/AutoDrawer/blob/master/examples/original.png?raw=true)
+![Drawed Image](https://github.com/GustavoMuller2019/AutoDrawer/blob/master/examples/drawed.png?raw=true)
 <br><br>Open the program and paste in the URL of the image or select one from your computer.
 Then, customize all the drawing parameters you want. You can preview the image, the thresholded image
 and the contours the program will draw with the 3 preview buttons at the bottom.
