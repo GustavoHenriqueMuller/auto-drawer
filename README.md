@@ -19,7 +19,7 @@ Interface: PySimpleGUI<br/>
 Drawing: Pynput<br/>
 
 Other libraries:<br/>
-Time, Winsound, Numpy, urrlib.request, skimage.io, keyboard
+Time, Winsound, Numpy, Urrlib, Skimage, keyboard
 
 # Learn more
 If you don't understand what all of the image parameters are, make sure you read about them at https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_setup/py_intro/py_intro.html#intro.
