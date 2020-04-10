@@ -12,7 +12,7 @@ and the contours the program will draw with the 3 preview buttons at the bottom.
 Once you're satisfied, click the draw button. After clicking, the program will start drawing in 3 seconds,
 so make sure you already have Paint opened up beforehand.
 After the 3 seconds, the program will record the position of your mouse. That position will be the top left corner of the image.
-Finally, the program will minimize and will start to simulate mouse presses/clicks to draw on the screen.
+Finally, the program will minimize and will start to simulate mouse presses/movements to draw on the screen.
 <br><b>Press [ESC] to stop drawing during runtime!</b>
 
 # Libraries Used
