@@ -1,5 +1,5 @@
 # AutoDrawer
-<b>Download (.exe):</b> https://drive.google.com/open?id=1ELDUu110wHHd2LwbTFKMODhpv10tm126 <br>
+<b>Download (.exe):</b> [.exe being fixed, please wait] <br>
 A program made in Python 3.7 that automatically draws an image using OpenCV and Pynput. Made to work with Paint, but it can also work with other drawing tools.
 
 # How to use
