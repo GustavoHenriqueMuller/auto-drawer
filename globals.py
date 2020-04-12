@@ -2,7 +2,7 @@ import cv2 as cv
 
 # GLOBAL VARIABLES
 TITLE = "AutoDrawer"
-VERSION = 1.2
+VERSION = 1.25
 
 PROGRAM_THEME = "Reddit"
 STD_FONT = ("Helvetica", 12)

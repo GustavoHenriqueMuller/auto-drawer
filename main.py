@@ -40,7 +40,7 @@ layout = [ # Row 1
            # Row 4
            [sg.Text("Simple Threshold Type:", font=STD_FONT), sg.InputOptionMenu(key="-simpleThresholdType-", values=list(THRESHOLD_TYPES.keys()), default_value=list(THRESHOLD_TYPES.keys())[0]),
             sg.Text("Simple Threshold:", font=STD_FONT), sg.InputText("127", key="-simpleThreshold-", font=STD_FONT, size=(4,1)), sg.Button("?", key="-infoSimpleThreshold-", size=(2,1), button_color=("white", INFO_BUTTON_COLOR)),
-            sg.Text("Delay:", font=STD_FONT), sg.InputText("0.015", key="-delay-", font=STD_FONT, size=(7,1)), sg.Button("?", key="-infoDelay-", size=(2,1), button_color=("white", INFO_BUTTON_COLOR))],
+            sg.Text("Delay:", font=STD_FONT), sg.InputText("0.0075", key="-delay-", font=STD_FONT, size=(7,1)), sg.Button("?", key="-infoDelay-", size=(2,1), button_color=("white", INFO_BUTTON_COLOR))],
            # Row 5
            [sg.Text("Simple Contour Approximation Method:", font=STD_FONT), sg.InputOptionMenu(key="-simpleThresholdContourApproximationMethod-", values=list(THRESHOLD_CONTOUR_APPROX_METHODS.keys()), default_value=list(THRESHOLD_CONTOUR_APPROX_METHODS.keys())[0]),
             sg.Text("Simple Max Value:", font=STD_FONT), sg.InputText("255", key="-simpleThresholdMaxValue-", font=STD_FONT, size=(4,1)),
@@ -53,7 +53,7 @@ layout = [ # Row 1
             sg.Text("Blocksize:", font=STD_FONT), sg.InputText("11", key="-blockSize-", font=STD_FONT, size=(3,1)), sg.Button("?", key="-infoBlocksize-", size=(2,1), button_color=("white", INFO_BUTTON_COLOR)),
             sg.Text("C:", font=STD_FONT), sg.InputText("2", key="-c-", font=STD_FONT, size=(3,1)), sg.Button("?", key="-infoC-", size=(2,1), button_color=("white", INFO_BUTTON_COLOR))],
            # Row 8
-           [sg.Text("Adaptive Threshold Type:", font=STD_FONT), sg.InputOptionMenu(key="-adaptiveThresholdType-", values=list(THRESHOLD_TYPES.keys()), default_value=list(THRESHOLD_TYPES.keys())[0]),
+           [sg.Text("Adaptive Threshold Type:", font=STD_FONT), sg.InputOptionMenu(key="-adaptiveThresholdType-", values=list(THRESHOLD_TYPES.keys())[0:2], default_value=list(THRESHOLD_TYPES.keys())[0]),
             sg.Text("Adaptive Max Value:", font=STD_FONT), sg.InputText("255", key="-adaptiveThresholdMaxValue-", font=STD_FONT, size=(4,1)), sg.Button("?", key="-infoAdaptiveThresholdMaxValue-", size=(2,1), button_color=("white", INFO_BUTTON_COLOR))],
            # Row 9
            [sg.Text("Adaptive Contour Approximation Method:", font=STD_FONT), sg.InputOptionMenu(key="-adaptiveThresholdContourApproximationMethod-", values=list(THRESHOLD_CONTOUR_APPROX_METHODS.keys()), default_value=list(THRESHOLD_CONTOUR_APPROX_METHODS.keys())[0]),

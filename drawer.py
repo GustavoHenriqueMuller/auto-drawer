@@ -8,7 +8,6 @@ import winsound
 import cv2 as cv
 import numpy as np
 from urllib.request import urlopen
-from skimage import io
 import keyboard
 from pynput.mouse import Button, Controller
 import PySimpleGUI as sg
