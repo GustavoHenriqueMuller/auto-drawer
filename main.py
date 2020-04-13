@@ -34,7 +34,7 @@ sg.theme(PROGRAM_THEME)
 layout = [ # Row 1
            [sg.Text(TITLE + " v" + str(VERSION), font=STD_HEADER_FONT, size=(PROGRAM_WIDTH,1), justification="center")],
            # Row 2
-           [sg.Text("Image URL/Path:", font=STD_FONT), sg.InputText(key="-imagePath-", font=STD_FONT, text_color="blue"), sg.FileBrowse(key="-fileBrowser-", font=STD_FONT, size=(10,1), file_types=(("PNG Files", "*.png"), ("JPG Files", "*.jpg"), ("JPEG Files", "*.jpeg")))],
+           [sg.Text("Image URL/Path:", font=STD_FONT), sg.InputText(key="-imagePath-", font=STD_FONT, text_color="blue"), sg.FileBrowse(key="-fileBrowser-", font=STD_FONT, size=(10,1), file_types=(("All Files", "*"), ("PNG Files", "*.png"), ("JPG Files", "*.jpg"), ("JPEG Files", "*.jpeg")))],
            # Row 3
            [sg.Text("_" * PROGRAM_WIDTH * 2)],
            # Row 4

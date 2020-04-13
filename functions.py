@@ -23,7 +23,7 @@ def imagePathIsValid(imagePath):
     else:
         # If its an image on the computer       
         image = cv.imread(imagePath)
-        if image == None:
+        if image.all() == None:
             return "Error on opening local image: File doesn't exist."
         else:
             return ""
