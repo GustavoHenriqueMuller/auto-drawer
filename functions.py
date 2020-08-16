@@ -26,11 +26,15 @@ def imagePathIsValid(imagePath):
         except Exception as e:
             return False, "Error on opening URL: " + str(e) + "."
     else:
-        image = cv.imread(imagePath)
-        if image.all() == None:
-            return False, "Error on opening local image: File doesn't exist."
-        else:
-            return True, ""
+        try:
+            image = cv.imread(imagePath)
+
+            if image.all() == None:
+                return False, "Error on opening local image: File doesn't exist."
+            else:
+                return True, ""
+        except:
+            return False, "Error on opening local image: File doesn't exist."        
 
 def getImage(imagePath):
     image = []

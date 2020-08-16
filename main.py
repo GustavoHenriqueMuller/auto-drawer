@@ -46,7 +46,7 @@ adaptiveThresholdMaxValue = 0
 adaptiveThresholdType = ""
 adaptiveThresholdMethod = ""
 adaptiveThresholdContourApproximationMethod = ""
-#sg.theme_previewer() 
+
 sg.theme(PROGRAM_THEME)
 layout = [ # Row 1
            [sg.Text(TITLE, font=STD_HEADER_FONT, size=(PROGRAM_WIDTH,1), justification="center")],
