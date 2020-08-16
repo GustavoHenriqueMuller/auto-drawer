@@ -16,8 +16,10 @@ import keyboard
 from pynput.mouse import Button, Controller
 import PySimpleGUI as sg
 
-mouse = Controller()
 delay = main.delay
+scale = main.scale
+
+mouse = Controller()
 image = functions.getImage(main.imagePath)
 imageGray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
 imageThresholded = []
@@ -57,7 +59,7 @@ if not main.preview:
                 break
             
             # Next point
-            mouse.position = (initX + point[0][0], initY + point[0][1])
+            mouse.position = (initX + (point[0][0] * scale), initY + (point[0][1] * scale))
             time.sleep(delay)
             
             # New contour

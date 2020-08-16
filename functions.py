@@ -123,6 +123,12 @@ def checkErrors(values, imagePath):
     elif not valueIsNumber(values, "simpleThreshold"):
         errorState[1] = "Delay needs to be a number."
 
+    # Scale
+    elif valueIsEmpty(values, "scale"):
+        errorState[1] = "Scale property cannot be empty."
+    elif not valueIsNumber(values, "scale"):
+        errorState[1] = "Scale needs to be a number."
+
     # If path is not valid
     pathIsValid, imageErrorMessage = imagePathIsValid(imagePath)
 

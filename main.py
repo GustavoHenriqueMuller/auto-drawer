@@ -34,6 +34,7 @@ usesAdaptiveThreshold = False
 imagePath = ""
 startupTime = 3 # Seconds
 delay = 0 # Seconds
+scale = 1.0
 
 simpleThreshold = 0
 simpleThresholdMaxValue = 0
@@ -57,11 +58,13 @@ layout = [ # Row 1
            # Row 4
            [sg.Text("Simple Threshold Type:", font=STD_FONT), sg.InputOptionMenu(key="-simpleThresholdType-", values=list(THRESHOLD_TYPES.keys()), default_value=list(THRESHOLD_TYPES.keys())[0]),
             sg.Text("Simple Threshold:", font=STD_FONT), sg.InputText("127", key="-simpleThreshold-", font=STD_FONT, size=(4,1)), sg.Button("?", key="-infoSimpleThreshold-", size=(2,1), button_color=("white", INFO_BUTTON_COLOR)),
-            sg.Text("Delay:", font=STD_FONT), sg.InputText("0.0075", key="-delay-", font=STD_FONT, size=(7,1)), sg.Button("?", key="-infoDelay-", size=(2,1), button_color=("white", INFO_BUTTON_COLOR))],
+            sg.Text("Delay:", font=STD_FONT), sg.InputText("0.00025", key="-delay-", font=STD_FONT, size=(7,1)), sg.Button("?", key="-infoDelay-", size=(2,1), button_color=("white", INFO_BUTTON_COLOR))],
            # Row 5
            [sg.Text("Simple Contour Approximation Method:", font=STD_FONT), sg.InputOptionMenu(key="-simpleThresholdContourApproximationMethod-", values=list(THRESHOLD_CONTOUR_APPROX_METHODS.keys()), default_value=list(THRESHOLD_CONTOUR_APPROX_METHODS.keys())[0]),
             sg.Text("Simple Max Value:", font=STD_FONT), sg.InputText("255", key="-simpleThresholdMaxValue-", font=STD_FONT, size=(4,1)),
-            sg.Button("?", key="-infoSimpleThresholdMaxValue-", size=(2,1), button_color=("white", INFO_BUTTON_COLOR))],
+            sg.Button("?", key="-infoSimpleThresholdMaxValue-", size=(2,1), button_color=("white", INFO_BUTTON_COLOR)),
+            sg.Text("Scale:", font=STD_FONT), sg.InputText("1.0", key="-scale-", font=STD_FONT, size=(4,1)),
+            sg.Button("?", key="-infoScale-", size=(2,1), button_color=("white", INFO_BUTTON_COLOR))],
            # Row 6
            [sg.Text("_" * PROGRAM_WIDTH * 2)],
            # Row 7
@@ -113,8 +116,10 @@ while True:
                 previewType = event.replace("-", "")
                 previewType = previewType.replace("preview", "")
 
-            # Simple Threshold
             delay = float(values["-delay-"])
+            scale = float(values["-scale-"])
+                
+            # Simple Threshold            
             simpleThreshold = int(values["-simpleThreshold-"]) 
             simpleThresholdMaxValue = int(values["-simpleThresholdMaxValue-"])
             simpleThresholdType = values["-simpleThresholdType-"]
