@@ -1,38 +1,55 @@
-# DEPENDENCIES
+#====-------------------------------------------------------------------------====#
+# MIT License
+
+# Copyright (c) 2020 GustavoMuller2019
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+#====-------------------------------------------------------------------------====#
+
 import drawer
 import functions
 from globals import *
 
-# LIBRARIES
 import PySimpleGUI as sg
 
-# VARIABLES
 preview = False
 previewType = "" # Image, Threshold or Contours
 usesAdaptiveThreshold = False
 imagePath = ""
-startupTime = 3
-delay = 0
+startupTime = 3 # Seconds
+delay = 0 # Seconds
 
-# SIMPLE THRESHOLD
 simpleThreshold = 0
 simpleThresholdMaxValue = 0
 simpleThresholdType = ""
 simpleThresholdContourApproximationMethod = ""
 
-# ADAPTIVE THRESHOLD
 blockSize = 0
 c = 0
 adaptiveThresholdMaxValue = 0
 adaptiveThresholdType = ""
 adaptiveThresholdMethod = ""
 adaptiveThresholdContourApproximationMethod = ""
-
-# LAYOUT
+#sg.theme_previewer() 
 sg.theme(PROGRAM_THEME)
-
 layout = [ # Row 1
-           [sg.Text(TITLE + " v" + str(VERSION), font=STD_HEADER_FONT, size=(PROGRAM_WIDTH,1), justification="center")],
+           [sg.Text(TITLE, font=STD_HEADER_FONT, size=(PROGRAM_WIDTH,1), justification="center")],
            # Row 2
            [sg.Text("Image URL/Path:", font=STD_FONT), sg.InputText(key="-imagePath-", font=STD_FONT, text_color="blue"), sg.FileBrowse(key="-fileBrowser-", font=STD_FONT, size=(10,1), file_types=(("All Files", "*"), ("PNG Files", "*.png"), ("JPG Files", "*.jpg"), ("JPEG Files", "*.jpeg")))],
            # Row 3
@@ -69,41 +86,26 @@ layout = [ # Row 1
            [sg.Text("", key="-error-", font=STD_FONT, size=(PROGRAM_WIDTH,1), text_color="red", pad=((0, 0),(15,0)))],
            [sg.Text("_" * PROGRAM_WIDTH * 2)]]
 
-# WINDOW
-window = sg.Window(TITLE + " v" + str(VERSION), layout)
-
-# EVENT LOOP
+# Loop and Window
+window = sg.Window(TITLE, layout)
 while True:
     event, values = window.read()
 
-    # Quits when the window closes
+    # Quit
     if event is None:
         exit()
 
-    # Info Simple Threshold
-    elif event == "-infoSimpleThreshold-":
-        sg.popup("For every pixel, the Normal Threshold value is applied.\nIf the pixel value is smaller than the threshold,\nit is set to 0, otherwise it is set to [Simple Max Value].", title="Simple Threshold")
-    elif event == "-infoDelay-":
-        sg.popup("Delay is the time waited between drawing each point.\nThe lower the Delay, the quicker the program will run,\nbut with less details.", title="Delay")
-    elif event == "-infoSimpleThresholdMaxValue-":
-        sg.popup("Simple Max Value is the value which is assigned to pixel values\nexceeding the simple threshold.", title="Simple Max Value")
+    # Info
+    elif event[:5] == "-info":
+        event = event[1:]; event = event[:-1]
+        sg.popup(INFO_DESCRIPTION[event], title=INFO_WINDOW_NAME[event])
 
-    # Info Adaptive Threshold    
-    elif event == "-infoBlocksize-":     
-        sg.popup("Size of a pixel neighborhood that is used to calculate\na threshold value for the pixel: 3, 5, 7, and so on.", title="Blocksize")
-    elif event == "-infoC-":
-        sg.popup("Constant subtracted from the mean or weighted mean.\nNormally, it is positive but may be zero or negative as well.", title="C")
-    elif event == "-infoAdaptiveThreshold-":
-        sg.popup("In simple thresholding, the threshold value is global, i.e., it is same for all the pixels in the image.\nAdaptive thresholding is the method where the threshold value is calculated for smaller regions\nand therefore, there will be different threshold values for different regions.", title="Adaptive Threshold")
-    elif event == "-infoAdaptiveThresholdMaxValue-":
-        sg.popup("Adaptive Max Value is the value which is assigned to pixel values\nexceeding the adaptive threshold determined by the pixel neighborhood.", title="Adaptive Max Value")
-
-    # Draw or preview drawing
+    # Draw or Preview
     elif event == "-draw-" or event[:8] == "-preview":
         imagePath = values["-imagePath-"]
         hasErrors, error = functions.checkErrors(values, imagePath)
+
         if not hasErrors:
-            # Drawing or preview
             if event == "-draw-":
                 preview = False
             else:
@@ -120,7 +122,6 @@ while True:
 
             # Adaptive Threshold
             usesAdaptiveThreshold = bool(values["-adaptiveThreshold-"])
-
             if usesAdaptiveThreshold:
                 blockSize = int(values["-blockSize-"])
                 c = int(values["-c-"])
@@ -129,20 +130,15 @@ while True:
                 adaptiveThresholdMethod = values["-adaptiveThresholdMethod-"]
                 adaptiveThresholdContourApproximationMethod = values["-adaptiveThresholdContourApproximationMethod-"]
 
-            # Minimizes the window
+            # Minimize
             if not preview:
                 window["-error-"].update("Running...")
                 window.minimize()
             else:
                 window["-error-"].update("Getting image...")
 
-            # Refreshes the window a last time before running
             window.refresh()
-
-            # Executes the program
             exec(open("drawer.py").read())
-
-            # Clears the warning text
             window["-error-"].update("")
         else:
-            window["-error-"].update(error) # Print error
+            window["-error-"].update(error)

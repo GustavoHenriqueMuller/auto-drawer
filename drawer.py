@@ -1,8 +1,12 @@
-# DEPENDENCIES
+#====-------------------------------------------------====#
+#                         Drawer.
+# This file is responsible for generating the contours
+# and actually moving the mouse along their points.
+#====-------------------------------------------------====#
+
 import main
 import functions
 
-# LIBRARIES
 import time
 import winsound
 import cv2 as cv
@@ -12,7 +16,6 @@ import keyboard
 from pynput.mouse import Button, Controller
 import PySimpleGUI as sg
 
-# VARIABLES
 mouse = Controller()
 delay = main.delay
 image = functions.getImage(main.imagePath)
@@ -20,28 +23,25 @@ imageGray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
 imageThresholded = []
 contours = []
 
-# CONTOURS
-if not main.usesAdaptiveThreshold:
-    # SIMPLE
-    contours, imageThresholded = functions.generateSimpleContours(imageGray, main.simpleThreshold, main.simpleThresholdMaxValue,
-                                                main.simpleThresholdType, main.simpleThresholdContourApproximationMethod) 
-else:
-    # ADAPTIVE
+# Getting contours
+if main.usesAdaptiveThreshold:
     contours, imageThresholded = functions.generateAdaptiveContours(imageGray, main.adaptiveThresholdMaxValue, main.adaptiveThresholdMethod,
                                                   main.adaptiveThresholdType, main.blockSize, main.c, main.adaptiveThresholdContourApproximationMethod) 
+else:
+    contours, imageThresholded = functions.generateSimpleContours(imageGray, main.simpleThreshold, main.simpleThresholdMaxValue,
+                                                main.simpleThresholdType, main.simpleThresholdContourApproximationMethod)    
 
-# DRAWS ON SCREEN
+# Draw
 if not main.preview:
-    # STARTUP
+    # Startup
     time.sleep(main.startupTime)
     main.window.minimize()
 
-    # INITX AND INITY WILL BE THE TOP LEFT CORNER OF THE IMAGE
+    # InitX and InitY are the top-left corner of the image
     initX = mouse.position[0]
     initY = mouse.position[1]
     isDrawing = True
 
-    # DRAWS ALL POINTS
     for contour in contours:
         if not isDrawing:
             break
@@ -50,40 +50,38 @@ if not main.preview:
         time.sleep(delay)
 
         for index, point in enumerate(contour):
-            # BREAKS EXECUTION
+            # Break
             if keyboard.is_pressed("esc"):
                 mouse.release(Button.left)
                 isDrawing = False
                 break
             
-            # MOVES THE MOUSE TO THE NEXT POINT
+            # Next point
             mouse.position = (initX + point[0][0], initY + point[0][1])
             time.sleep(delay)
             
-            # STARTS DRAWING ON A NEW CONTOUR
+            # New contour
             if(index == 1):
                 mouse.press(Button.left)
                 time.sleep(delay)
 
-    # DONE
     mouse.release(Button.left)
     winsound.Beep(440, 1000)
 
 else:
-    # PREVIEWS
+    # Preview
     if main.previewType == "Image":
-        # SHOWS IMAGE + CONTOURS
         cv.drawContours(image, contours, -1, (0,255,0), 2)
-        cv.imshow("Image Preview", image)
-    elif main.previewType == "Threshold":
-        # SHOWS THRESHOLDED IMAGE
+        cv.imshow("Image Preview", image) # Shows image + contours
+
+    elif main.previewType == "Threshold":        
         cv.drawContours(imageThresholded, contours, -1, (0,255,0), 2)
-        cv.imshow("Threshold Preview", imageThresholded)
+        cv.imshow("Threshold Preview", imageThresholded) # Shows thresholded image
+
     elif main.previewType == "Contours":
-        # SHOWS ONLY CONTOURS
         blackimg = np.zeros(image.shape)
 
         cv.drawContours(blackimg, contours, -1, (0,255,0), 2)
-        cv.imshow("Contours Preview", blackimg)
+        cv.imshow("Contours Preview", blackimg) # Shows only contours
 
     cv.waitKey(0)
