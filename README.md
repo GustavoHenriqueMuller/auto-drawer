@@ -1,5 +1,5 @@
 # AutoDrawer
-A program made in Python 3.7 that automatically draws an image using OpenCV and Pynput. Made to work with Paint, but it can also work with other drawing tools.
+A program made in Python 3.7 that automatically draws an image using OpenCV and Pynput. Made to work with Paint, but it can also work with other drawing tools. The project is being developed in Visual Studio 2019 (Community Edition).
 
 # How to use
 <img src="https://github.com/GustavoMuller2019/AutoDrawer/blob/master/examples/interfaceExample.png?raw=true">
