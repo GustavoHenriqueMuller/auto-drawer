@@ -1,0 +1,7 @@
+pysimplegui>=4.18.0
+opencv-python>=4.2.0.34
+numpy>=1.17.3
+urllib3>=1.25.9
+keyboard>=0.13.5
+six>=1.13.0
+pynput>=1.6.5
