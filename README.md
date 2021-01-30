@@ -7,7 +7,7 @@ A program made in Python 3.7 that automatically draws an image using OpenCV and 
 
 * Open CMD in the project folder and run "pip install -r requirements.text" to install all the libraries needed.<br>
 * Run "main.py".<br>
-* Customize all the drawing parameters you want.<br>
+* Customize all the drawing parameters.<br>
 * Once you're satisfied, click the draw button. After clicking, the program will start drawing in 3 seconds, so make sure you already have Paint opened up beforehand in the background.<br>
 * After the 3 seconds, the program will record the position of your mouse. That position will be the top left corner of the image.<br>
 * Finally, the program will minimize and will start to simulate mouse presses/movements to draw on the screen.<br>
